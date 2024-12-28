@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from "react";
 import {Engine, Render, World, Runner, Mouse, MouseConstraint, Events} from "matter-js";
 import Ground from './Ground';  
+import Bird from './Bird';
+
 
 function Main() {
 
@@ -22,8 +24,20 @@ function Main() {
         Render.run(render);
         Runner.run(runner, engine);
         const groundTexture = './piso.jpg';
+        const birdTexture = './pajaro.png';
         Ground(world, window.innerWidth, window.innerHeight, groundTexture);
-
+        let bird = Bird(world, 200, 500, 25, birdTexture);
+        let mouse = Mouse.create(render.canvas);
+        let mouseContraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.05,
+                render: {
+                    visible: false,
+                }
+            }
+        });
+        World.add(world, mouseContraint);
         return () => {
             Render.stop(render);
             Runner.stop(runner);
