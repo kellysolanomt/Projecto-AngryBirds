@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from "react";
 import {Engine, Render, World, Runner, Mouse, MouseConstraint, Events} from "matter-js";
 import Ground from './Ground';  
 import Bird from './Bird';
-
+import SlingShot from './SlingShot';
 
 function Main() {
 
@@ -27,6 +27,8 @@ function Main() {
         const birdTexture = './pajaro.png';
         Ground(world, window.innerWidth, window.innerHeight, groundTexture);
         let bird = Bird(world, 200, 500, 25, birdTexture);
+        let slingShot = SlingShot(world, bird, 200, 500);
+
         let mouse = Mouse.create(render.canvas);
         let mouseContraint = MouseConstraint.create(engine, {
             mouse: mouse,
