@@ -29,6 +29,8 @@ const Ground = (world, width, height, groundTexture) => {
             World.add(world, bloquePiso);
         }
     }
+
+    return window.innerHeight - tileHeight*3;
     
 
 }

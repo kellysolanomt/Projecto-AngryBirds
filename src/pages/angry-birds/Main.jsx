@@ -25,21 +25,43 @@ function Main() {
         Runner.run(runner, engine);
         const groundTexture = './piso.jpg';
         const birdTexture = './pajaro.png';
-        Ground(world, window.innerWidth, window.innerHeight, groundTexture);
-        let bird = Bird(world, 200, 500, 25, birdTexture);
-        let slingShot = SlingShot(world, bird, 200, 500);
+        const slingPoleTexture = './resortera.png';
+        let ground = Ground(world, window.innerWidth, window.innerHeight, groundTexture);
+        
+        const birdX = 400;
+        const birdY = 650;
+        const birdRadius = 25;
+        const leftArmX = birdX - 25;   // Ajustar el desplazamiento respecto al pájaro
+        const rightArmX = birdX + 24;  // Ajustar el desplazamiento respecto al pájaro
+        const centerX = birdX;  // El centro de la resortera debe coincidir con el pájaro
+        const leftArmY = birdY;
+        const rightArmY = birdY;
 
+        let bird = Bird(world, birdX, birdY, birdRadius, birdTexture);
+        let {slingLeft, slingRight, slingPole} = SlingShot(world, bird, birdX, birdY, leftArmX, leftArmY, rightArmX, rightArmY, ground, slingPoleTexture);
+        // World.add(world, bird);
+        
+        
         let mouse = Mouse.create(render.canvas);
         let mouseContraint = MouseConstraint.create(engine, {
             mouse: mouse,
             constraint: {
-                stiffness: 0.05,
+                stiffness: 0.07,
                 render: {
                     visible: false,
                 }
             }
         });
         World.add(world, mouseContraint);
+
+        Events.on(mouseContraint, 'mouseup', ()=> {
+            setTimeout(() => {
+                slingLeft.bodyB = null;
+                slingRight.bodyB = null;
+                slingRight.pointB = {x: centerX, y: rightArmY};
+                slingLeft.pointB = {x: centerX, y: leftArmY};
+            }, 100);
+        });
         return () => {
             Render.stop(render);
             Runner.stop(runner);
