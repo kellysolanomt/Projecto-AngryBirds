@@ -3,6 +3,7 @@ import {Engine, Render, World, Runner, Mouse, MouseConstraint, Events} from "mat
 import Ground from './Ground';  
 import Bird from './Bird';
 import SlingShot from './SlingShot';
+import PigCastle from "./PigCastle";
 
 function Main() {
 
@@ -40,6 +41,7 @@ function Main() {
         let bird = Bird(world, birdX, birdY, birdRadius, birdTexture);
         let {slingLeft, slingRight, slingPole} = SlingShot(world, bird, birdX, birdY, leftArmX, leftArmY, rightArmX, rightArmY, ground, slingPoleTexture);
         // World.add(world, bird);
+        PigCastle(world);
         
         
         let mouse = Mouse.create(render.canvas);

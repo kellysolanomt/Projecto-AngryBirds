@@ -19,7 +19,7 @@ function SlingShot(world, bird, x, y, leftArmX, leftArmY, rightArmX, rightArmY, 
         bodyB: bird,
         pointB: { x: 0, y: 0 }, 
         stiffness: 0.01,
-        length: 8,
+        length: 10,
         render: {
             type: 'line',
             strokeStyle: '#120E0A', 
@@ -32,7 +32,7 @@ function SlingShot(world, bird, x, y, leftArmX, leftArmY, rightArmX, rightArmY, 
         bodyB: bird,
         pointB: { x: 0, y: 0 }, 
         stiffness: 0.01,
-        length: 8,
+        length: 10,
         render: {
             type: 'line',
             strokeStyle: '#120E0A', 
@@ -52,17 +52,17 @@ function SlingShot(world, bird, x, y, leftArmX, leftArmY, rightArmX, rightArmY, 
         }
     });
 
-    const slingCenter = Constraint.create({
-        pointA: { x: x, y: y }, // Centro de la resortera
-        bodyB: bird,
-        // pointB: { x: 0, y: 0 }, // Centro del pájaro
-        stiffness: 0.05,
-        length: 10,
-        render: {
-            strokeStyle: '#000',
-            lineWidth: 3
-        }
-    });
+    // const slingCenter = Constraint.create({
+    //     pointA: { x: x, y: y }, // Centro de la resortera
+    //     bodyB: bird,
+    //     // pointB: { x: 0, y: 0 }, // Centro del pájaro
+    //     stiffness: 0.05,
+    //     length: 10,
+    //     render: {
+    //         strokeStyle: '#000',
+    //         lineWidth: 3
+    //     }
+    // });
     World.add(world, [slingLeft, slingRight, slingPole]);
     return {slingLeft, slingRight, slingPole};
     // World.add(world, slingCenter);
