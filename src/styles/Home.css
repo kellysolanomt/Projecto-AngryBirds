@@ -17,7 +17,7 @@ body{
     padding: 0;
     height: 100vh;
     width: 100vw;
-    background-image: url("./fondo_home.svg");
+    background: url("./fondo_home.svg");
     background-size: cover;
 }
 
@@ -43,7 +43,7 @@ body{
     font-family: 'Angry Birds';
     font-size: 3em;
     background-color: rgb(199, 28, 28);
-    color: #fff;
+    color: #ffffff;
     padding: 10px 20px;
     width: 400px;
     border: none;
@@ -51,6 +51,7 @@ body{
     cursor: pointer;
     /* margin-top: 20px; */
     box-shadow: 2px 2px 2px #000;
+    
 }
 
 .home button:hover{
