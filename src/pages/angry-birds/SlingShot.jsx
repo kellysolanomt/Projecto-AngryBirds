@@ -41,13 +41,13 @@ function SlingShot(world, bird, x, y, leftArmX, leftArmY, rightArmX, rightArmY, 
     });
 
 
-    const slingPole = Bodies.rectangle(x, ground-(510/4.2), 25, 200, {
+    const slingPole = Bodies.rectangle(x, ground-(460/4.2), 25, 200, {
         isStatic: true,
         render: {
             sprite: {
                 texture: slingPoleTexture, // Textura del palo
-                xScale: 0.5,
-                yScale: 0.5
+                xScale: 0.45,
+                yScale: 0.45
             }
         }
     });

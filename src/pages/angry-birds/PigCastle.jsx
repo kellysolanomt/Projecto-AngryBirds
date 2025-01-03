@@ -13,6 +13,7 @@ function PigCastle(world) {
 			density: 0.04,
 			restitution: 0.8,
 			friction: 0.5,
+			frictionAir: 0.02,
 			render: {
 				sprite: {
 					texture: texture,

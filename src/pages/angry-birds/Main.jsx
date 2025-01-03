@@ -29,8 +29,8 @@ function Main() {
         const slingPoleTexture = './resortera.png';
         let ground = Ground(world, window.innerWidth, window.innerHeight, groundTexture);
         
-        const birdX = 400;
-        const birdY = 650;
+        const birdX = window.innerWidth/4;
+        const birdY = window.innerHeight - (innerHeight - ground + 510*0.36);
         const birdRadius = 25;
         const leftArmX = birdX - 25;   // Ajustar el desplazamiento respecto al pájaro
         const rightArmX = birdX + 24;  // Ajustar el desplazamiento respecto al pájaro
@@ -56,6 +56,7 @@ function Main() {
         });
         World.add(world, mouseContraint);
 
+        
         Events.on(mouseContraint, 'mouseup', ()=> {
             setTimeout(() => {
                 slingLeft.bodyB = null;
@@ -64,6 +65,9 @@ function Main() {
                 slingLeft.pointB = {x: centerX, y: leftArmY};
             }, 100);
         });
+        
+       
+
         return () => {
             Render.stop(render);
             Runner.stop(runner);
