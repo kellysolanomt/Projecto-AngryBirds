@@ -6,7 +6,7 @@ function Bird(world, x, y, radius, birdTexture) {
     density: 0.05,   // Reduce ligeramente la densidad
     restitution: 0.6, // Reduce el rebote
     friction: 0.5,   // Ajusta la fricción para suavizar interacciones
-    frictionAir: 0.02, // Agrega fricción del aire para amortiguar oscilaciones
+    frictionAir: 0.01, // Agrega fricción del aire para amortiguar oscilaciones
     render: {
         sprite: {
             texture: birdTexture,

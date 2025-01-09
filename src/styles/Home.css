@@ -32,10 +32,11 @@ body{
 
 .home h1{
     font-family:'Feast of Flesh BB';
-    font-size: 15em;
+    font-size: 12rem;
     color: #fff;
+    margin: 2rem;
     text-shadow: 2px 2px 2px #000;
-    -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: black;
 }
 
