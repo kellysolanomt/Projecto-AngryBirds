@@ -15,7 +15,7 @@ function Bird(world, x, y, radius, birdTexture) {
         }
     }
   })
-  World.add(world, bird);
+  // World.add(world, bird);
   return bird;
 }
 export default Bird;

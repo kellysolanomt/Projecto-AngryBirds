@@ -1,21 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Engine, Render, World, Runner, Mouse, MouseConstraint, Events } from "matter-js";
+import { Engine, Render, World, Runner, Mouse, MouseConstraint, Events, use } from "matter-js";
 import Ground from './Ground';
 import Bird from './Bird';
 import SlingShot from './SlingShot';
 import PigCastle from "./PigCastle";
 import { handlePigCollisions } from './handlePigCollisions';
+import "../../styles/Main.css"
 
 function Main() {
 
     const sceneRef = useRef(null);
     const pajaroLanzadoRef = useRef(false);
 
+
+
     useEffect(() => {
         const engine = Engine.create();
         const runner = Runner.create();
         const world = engine.world;
-        const render = Render.create({
+        let render = Render.create({
             element: sceneRef.current,
             engine: engine,
             options: {
@@ -42,6 +45,7 @@ function Main() {
         const rightArmY = birdY;
 
         let bird = Bird(world, birdX, birdY, birdRadius, birdTexture);
+        World.add(world, bird);
         let { slingLeft, slingRight, slingPole } = SlingShot(world, bird, birdX, birdY, leftArmX, leftArmY, rightArmX, rightArmY, ground, slingPoleTexture);
         // World.add(world, bird);
         PigCastle(world);
@@ -62,6 +66,7 @@ function Main() {
 
         Events.on(mouseContraint, 'mouseup', () => {
             pajaroLanzadoRef.current = true; // Actualiza la referencia inmediatamente.
+
             console.log('Pájaro lanzado', pajaroLanzadoRef.current);
             setTimeout(() => {
                 slingLeft.bodyB = null;
@@ -71,8 +76,10 @@ function Main() {
 
                 World.remove(world, mouseContraint);
             }, 100);
-            
+
         });
+
+
 
 
 
@@ -102,15 +109,24 @@ function Main() {
 
     }, []);
 
+    const reiniciar = () => {
+        window.location.reload();
+    }
+
     return (
-        <div style={
-            {
-                overflow: 'hidden',
-                margin: 0,
-                backgroundImage: 'url("cielo.jpg")',
-                backgroundSize: "cover",
-            }
-        }>
+        // <div style={
+        //     {
+        //         overflow: 'hidden',
+        //         margin: 0,
+        //         backgroundImage: 'url("cielo.jpg")',
+        //         backgroundSize: "cover",
+        //     }
+        // }>
+        <div className="container">
+            <div className="btn-group">
+                <button className="btn" onClick={reiniciar}>Reiniciar</button>
+            </div>
+
             <div ref={sceneRef}></div>
         </div>
     );
