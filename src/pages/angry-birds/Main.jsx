@@ -46,7 +46,6 @@ function Main() {
 
         let bird = Bird(world, birdX, birdY, birdRadius, birdTexture);
         World.add(world, bird);
-        World.add(world, bird);
         let { slingLeft, slingRight, slingPole } = SlingShot(world, bird, birdX, birdY, leftArmX, leftArmY, rightArmX, rightArmY, ground, slingPoleTexture);
         // World.add(world, bird);
         PigCastle(world);
