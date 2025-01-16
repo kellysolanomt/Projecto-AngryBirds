@@ -5,6 +5,7 @@ import Bird from './Bird';
 import SlingShot from './SlingShot';
 import PigCastle from "./PigCastle";
 import { handlePigCollisions } from './handlePigCollisions';
+import "../../styles/Main.css";
 
 function Main() {
 
@@ -42,6 +43,7 @@ function Main() {
         const rightArmY = birdY;
 
         let bird = Bird(world, birdX, birdY, birdRadius, birdTexture);
+        World.add(world, bird);
         let { slingLeft, slingRight, slingPole } = SlingShot(world, bird, birdX, birdY, leftArmX, leftArmY, rightArmX, rightArmY, ground, slingPoleTexture);
         // World.add(world, bird);
         PigCastle(world);
@@ -101,16 +103,18 @@ function Main() {
         }
 
     }, []);
+    
+    const reiniciar = () => {
+        window.location.reload();
+    }
 
     return (
-        <div style={
-            {
-                overflow: 'hidden',
-                margin: 0,
-                backgroundImage: 'url("cielo.jpg")',
-                backgroundSize: "cover",
-            }
-        }>
+        <div className="contenedor">
+            <div className="boton-reinicio">
+                <button className="boton" onClick={reiniciar}>
+                    🔄️ Reiniciar nivel
+                </button>
+            </div>
             <div ref={sceneRef}></div>
         </div>
     );

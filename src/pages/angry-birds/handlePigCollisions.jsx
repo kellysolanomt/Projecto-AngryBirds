@@ -13,10 +13,10 @@ export function handlePigCollisions(pig, pair, world, isBirdLaunched) {
     );
 
     // Definir un umbral mínimo para que el impacto cause daño
-    const IMPACT_THRESHOLD = 1; // Ajustar según lo necesario
+    const IMPACT_THRESHOLD = 2; // Ajustar según lo necesario
     if (impactVelocity > IMPACT_THRESHOLD) {
         // Reducir la vida del cerdo basado en la fuerza del impacto
-        pig.life -= impactVelocity * 10; // Ajustar el multiplicador para balancear el daño
+        pig.life -= impactVelocity * 5; // Ajustar el multiplicador para balancear el daño
         console.log(`Cerdo fue golpeado, vida restante: ${pig.life}`);
 
         // Eliminar el cerdo si su vida llega a 0
