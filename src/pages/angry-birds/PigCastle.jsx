@@ -8,7 +8,7 @@ function PigCastle(world) {
 	const cerdo = './cerdo.png';
 	const radioCerdo = 25;
 	const createBlock = (x,y, width, height, texture, xScale, yScale) => {
-		return Bodies.rectangle(x,y,width,height, {
+		const block = Bodies.rectangle(x,y,width,height, {
 			isStatic: false,
 			density: 0.04,
 			restitution: 0.8,
@@ -22,6 +22,10 @@ function PigCastle(world) {
 				}
 			}
 		});
+
+		block.lifetime = 15000; 
+
+		return block;
 	}
 
 	const createPig = (x,y, radio) => {
@@ -41,6 +45,15 @@ function PigCastle(world) {
 		});
 
 		pig.life = 100;
+		pig.lifetime = 15000; // Lifetime en milisegundos (5 segundos, puedes ajustarlo)
+    	// pig.createdAt = Date.now(); // Fecha de creación para controlar el tiempo de vida
+		
+		// setTimeout(() => {
+		// 	if (Date.now() - pig.createdAt >= pig.lifeTime) {
+		// 		World.remove(world, pig);
+		// 	}
+		// }, pig.lifeTime);
+		
 		return pig;
 	}
 

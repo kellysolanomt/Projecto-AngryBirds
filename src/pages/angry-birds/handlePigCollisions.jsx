@@ -6,7 +6,7 @@ export function handlePigCollisions(pig, pair, world, isBirdLaunched) {
         return; // Si el pájaro no ha sido lanzado, no hacemos nada.
     }
 
-    console.log('Manejando colisión con cerdo');
+    // console.log('Manejando colisión con cerdo');
 
     // Calcular la velocidad relativa de los cuerpos en colisión
     const impactVelocity = Math.sqrt(

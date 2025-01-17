@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Engine, Render, World, Runner, Mouse, MouseConstraint, Events } from "matter-js";
+import { Engine, Render, World, Runner, Mouse, MouseConstraint, Events, Composite } from "matter-js";
 import Ground from './Ground';
 import Bird from './Bird';
 import SlingShot from './SlingShot';
@@ -100,6 +100,20 @@ function Main() {
                 const pig = [bodyA, bodyB].find(body => body.label === 'Pig');
                 if (pig) {
                     handlePigCollisions(pig, pair, world, () => pajaroLanzadoRef.current);
+                }
+            });
+        });
+
+        Events.on(engine, 'beforeUpdate', () => {
+            // console.log('beforeUpdate evento activado');
+            const allBodies = Composite.allBodies(engine.world);
+            allBodies.forEach(body => {
+                if (body.lifetime !== undefined) {
+                    body.lifetime -= 5; // Aproximadamente 16 ms por frame
+                    if (body.lifetime <= 0) {
+                        console.log(`Eliminando objeto: ${body.label}`); // Para ver si está ocurriendo la eliminación
+                        World.remove(world, body); // Eliminar el objeto cuando su lifetime se acaba
+                    }
                 }
             });
         });
@@ -224,8 +238,8 @@ function Main() {
     return (
         <div className="container">
             <div className="btn-group">
-                <button className="btn-siguientePajaro" onClick={launchNextBird}>Lanzar siguiente pájaro</button>
                 <button className="btn-reiniciar" onClick={reiniciar}></button>
+                <button className="btn-siguientePajaro" onClick={launchNextBird}>Lanzar siguiente pájaro</button>
             </div>
             <div ref={sceneRef}></div>
             <div>Intentos restantes: {attemptsLeft}</div>
