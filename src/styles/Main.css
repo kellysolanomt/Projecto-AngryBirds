@@ -32,15 +32,42 @@ body{
     display: flex;
     width: 100%;
     margin: 1em;
-    height: 3em;
+    height: 100px;
     z-index: 10;
+    align-items: center;
     position: absolute;
 }
 
-.btn {
-    width: 10rem;
-    height: 100%;
-    background-color: #f1c40f;
+.btn-reiniciar {
+    margin: 0 1em;
+    width: 100px;
+    height: 100px;
+    /* background-color: #fbb81e; */
+    /* color: #fff; */
+    /* font-size: 1.5em;
+    font-family: 'Angry Birds'; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* border: 2px solid #f49d1d; */
+    background-image: url('/ABPC_button_sheet.png');
+    background-position: -8px -949px;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: transform 0.5s ease;
+    transform: scale(0.8);
+}
+
+
+.btn-siguientePajaro{
+    margin: 0 1em;
+    width: 20rem;
+    height: 60%;
+    background-color: #fbb81e;
     color: #fff;
     font-size: 1.5em;
     font-family: 'Angry Birds';
@@ -48,8 +75,35 @@ body{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border: 2px solid #f49d1d;
+    transition: transform 0.8s ease;
 }
 
-.btn:hover {
-    background-color: #f39c12;
+.btn-reiniciar:hover {
+    outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
+    border: none; /* Asegura que no haya borde */
+    transform: scale(0.9); /* Agranda el botón un 10% */
 }
+
+.btn-reiniciar:focus {
+    outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
+    border: none; /* Asegura que no haya borde */
+}
+
+.btn-reiniciar:active {
+    transform: scale(0.7); /* Reduce la escala al hacer clic */
+}
+
+.btn-reiniciar:hover:active {
+    transform: scale(0.7); /* Asegura que el botón se reduzca al hacer clic incluso cuando está en estado hover */
+}
+
+.btn-reiniciar:focus:not(:hover) {
+    transform: scale(0.8); /* Restablece la escala al perder el hover */
+}
+
+.btn-siguientePajaro:hover {
+    background-color: #f49d1d;
+    border: 2px solid #fbb81e;
+}
+

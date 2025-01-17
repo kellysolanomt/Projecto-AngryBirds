@@ -20,7 +20,6 @@ function Main() {
 
     useEffect(() => {
         const engine = Engine.create();
-        currentEngine.current = engine;
         const runner = Runner.create();
         engineRef.current = engine;
         runnerRef.current = runner;
@@ -53,12 +52,10 @@ function Main() {
         const birdRadius = 25;
 
         const birdX = window.innerWidth / 4;
-        posBirdX.current = birdX;
         const birdY = window.innerHeight - (innerHeight - ground + 510 * 0.36);
         const leftArmX = birdX - 25;
         const rightArmX = birdX + 24;
         const leftArmY = birdY;
-        RefleftArmY.current = leftArmY;
         const rightArmY = birdY;
         const centerX = birdX;
 
@@ -227,8 +224,8 @@ function Main() {
     return (
         <div className="container">
             <div className="btn-group">
-                <button className="btn" onClick={launchNextBird}>Lanzar siguiente pájaro</button>
-                <button className="btn" onClick={reiniciar}>Reiniciar</button>
+                <button className="btn-siguientePajaro" onClick={launchNextBird}>Lanzar siguiente pájaro</button>
+                <button className="btn-reiniciar" onClick={reiniciar}></button>
             </div>
             <div ref={sceneRef}></div>
             <div>Intentos restantes: {attemptsLeft}</div>
