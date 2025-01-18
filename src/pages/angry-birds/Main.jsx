@@ -62,26 +62,6 @@ function Main() {
     return () => clearTimeout(timeout);
   }, [pigsEliminated, attemptsLeft]);
 
-  useEffect(() => {
-    
-    const update = () => {
-      
-      Engine.update(engineRef.current, 1000 / 60);
-
-      
-      if (pajaroLanzadoRef.current) {
-        checkPigsOutOfBounds(engineRef.world, setPigsEliminated); 
-      }
-
-      
-      requestAnimationFrame(update);
-    };
-
-    
-    requestAnimationFrame(update);
-
-    return () => cancelAnimationFrame(update); 
-  }, [pajaroLanzadoRef]); 
 
   useEffect(() => {
     const engine = Engine.create();
@@ -168,7 +148,7 @@ function Main() {
           slingshotRef.current.slingLeft.pointB = { x: centerX, y: leftArmY };
           slingshotRef.current.slingRight.pointB = { x: centerX, y: rightArmY };
 
-          
+
           setAttemptsLeft((prevAttempts) => {
             if (prevAttempts > 0) {
               return prevAttempts - 1;
@@ -197,14 +177,14 @@ function Main() {
     });
 
     Events.on(engine, "beforeUpdate", () => {
-      
+
       const allBodies = Composite.allBodies(engine.world);
       allBodies.forEach((body) => {
         if (body.lifetime !== undefined) {
-          body.lifetime -= 8; 
+          body.lifetime -= 8;
           if (body.lifetime <= 0) {
-            console.log(`Eliminando objeto: ${body.label}`); 
-            World.remove(world, body); 
+            console.log(`Eliminando objeto: ${body.label}`);
+            World.remove(world, body);
           }
         }
       });
@@ -221,8 +201,26 @@ function Main() {
     };
   }, []);
 
+  /* Quito este useEffect porque afecta el lanzamiento del pájaro */ 
+  // useEffect(() => {
+
+  //   if (!engineRef.current) {
+  //     return;
+  //   }
+  //   const update = () => {
+  //     Engine.update(engineRef.current, 1000 / 60);
+  //     if (pajaroLanzadoRef.current) {
+  //       checkPigsOutOfBounds(engineRef.current.world, setPigsEliminated, pajaroLanzadoRef.current);
+  //     }
+  //     requestAnimationFrame(update);
+  //   };
+  //   requestAnimationFrame(update);
+  //   return () => cancelAnimationFrame(update);
+  // }, [pajaroLanzadoRef]);
+
+
   const launchNextBird = () => {
-    if (attemptsLeft > 0) {
+    if (attemptsLeft > 0 && pajaroLanzadoRef.current === true) {
       const world = engineRef.current.world;
       const birdRadius = 25;
       const birdX = window.innerWidth / 4;
@@ -240,8 +238,10 @@ function Main() {
       World.add(world, newBird);
 
       pajaroLanzadoRef.current = false;
-    } else {
+    } else if (attemptsLeft === 0) {
       console.log("No quedan más intentos.");
+    } else {
+      console.log("Aún no has lanzado el pájaro actual.");
     }
   };
 

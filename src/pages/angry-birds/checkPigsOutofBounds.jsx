@@ -1,7 +1,7 @@
 import { World } from "matter-js";
 
 export function checkPigsOutOfBounds(world, setPigsEliminated, isBirdLaunched) {
-  if (!isBirdLaunched()) {
+  if (isBirdLaunched === false) {
     return;
   }
 
