@@ -45,13 +45,11 @@ function Main() {
   }, []);
 
   useEffect(() => {
-    if (pigsEliminated === 3) {
-      // Espera un breve período para que React actualice el DOM
+    if (pigsEliminated === 3 && attemptsLeft >= 0) {
       setTimeout(() => {
-        // alert(`¡Cerdos eliminados: ${pigsEliminated}!`);
         handleWin();
-      }, 100); // Ajusta el tiempo si es necesario
-    }
+      }, 100);
+    } 
   }, [pigsEliminated]);
 
   useEffect(() => {
