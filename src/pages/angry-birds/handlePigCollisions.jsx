@@ -1,12 +1,13 @@
 import { Events, World } from 'matter-js';
+import Main from './Main';
 
-export function handlePigCollisions(pig, pair, world, isBirdLaunched) {
+export function handlePigCollisions(pig, pair, world, isBirdLaunched, pigsEliminated, setPigsEliminated) {
     // Solo procesar si el pájaro ya fue lanzado
     if (!isBirdLaunched()) {
         return; // Si el pájaro no ha sido lanzado, no hacemos nada.
     }
 
-    // console.log('Manejando colisión con cerdo');
+    const totalPigs = world.bodies.filter(body => body.label === 'Pig').length;
 
     // Calcular la velocidad relativa de los cuerpos en colisión
     const impactVelocity = Math.sqrt(
@@ -25,6 +26,19 @@ export function handlePigCollisions(pig, pair, world, isBirdLaunched) {
         if (pig.life <= 0) {
             World.remove(world, pig);
             console.log('Cerdo eliminado del mundo');
+            setPigsEliminated(prev => {
+                const newCount = prev + 1;
+          
+                // Verificar si todos los cerdos han sido eliminados
+                
+                if (newCount === totalPigs) {
+                  alert("¡Haz ganado!");
+                }
+          
+                return newCount; // Devuelve el nuevo estado
+              });
         }
+
+        
     }
 }

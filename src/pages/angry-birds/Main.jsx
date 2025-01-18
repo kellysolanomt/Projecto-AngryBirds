@@ -17,6 +17,7 @@ function Main() {
     const groundRef = useRef(null);
     const [attemptsLeft, setAttemptsLeft] = useState(3);
     const pajaroLanzadoRef = useRef(false);
+    const [pigsEliminated, setPigsEliminated] = useState(0);
 
     useEffect(() => {
         const engine = Engine.create();
@@ -99,7 +100,7 @@ function Main() {
                 const { bodyA, bodyB } = pair;
                 const pig = [bodyA, bodyB].find(body => body.label === 'Pig');
                 if (pig) {
-                    handlePigCollisions(pig, pair, world, () => pajaroLanzadoRef.current);
+                    handlePigCollisions(pig, pair, world, () => pajaroLanzadoRef.current, pigsEliminated, setPigsEliminated);
                 }
             });
         });
@@ -163,6 +164,8 @@ function Main() {
             console.error("Motor o mundo no están inicializados.");
             return;
         }
+
+        
     
         // Detenemos y limpiamos el motor
         Runner.stop(runner);
@@ -172,7 +175,7 @@ function Main() {
         // Reiniciamos las referencias globales
         pajaroLanzadoRef.current = false;
         setAttemptsLeft(3);
-    
+        setPigsEliminated(0);
         // Configuramos el mundo nuevamente
         const world = engine.world;
     
