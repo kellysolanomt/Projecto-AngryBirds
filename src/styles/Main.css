@@ -72,9 +72,13 @@ body{
 
 .birds{
     
-    width: 50%;
-    height: 70%;
-    background-color: aliceblue;
+    width: 100px;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
 }
 
 .btn-reiniciar {
@@ -146,3 +150,9 @@ body{
     border: 2px solid #fbb81e;
 }
 
+.bird-image{
+    width: 50px;
+    height: auto;
+    margin: 5px 0;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5)); /* Agrega esta línea para la sombra */
+}
