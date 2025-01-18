@@ -63,25 +63,25 @@ function Main() {
   }, [pigsEliminated, attemptsLeft]);
 
   useEffect(() => {
-    // Inicia el ciclo de actualización
+    
     const update = () => {
-      // Actualiza el motor de física
+      
       Engine.update(engineRef.current, 1000 / 60);
 
-      // Verificar si el pájaro ya ha sido lanzado antes de verificar los cerdos fuera de los límites
+      
       if (pajaroLanzadoRef.current) {
-        checkPigsOutOfBounds(engineRef.world, setPigsEliminated); // Verificación de cerdos fuera de límites
+        checkPigsOutOfBounds(engineRef.world, setPigsEliminated); 
       }
 
-      // Continuar el ciclo de actualización
+      
       requestAnimationFrame(update);
     };
 
-    // Comienza el ciclo de actualización
+    
     requestAnimationFrame(update);
 
-    return () => cancelAnimationFrame(update); // Limpiar cuando el componente se desmonte
-  }, [pajaroLanzadoRef]); // La dependencia solo se ejecuta cuando se cambia `isBirdLaunched`
+    return () => cancelAnimationFrame(update); 
+  }, [pajaroLanzadoRef]); 
 
   useEffect(() => {
     const engine = Engine.create();
@@ -168,7 +168,7 @@ function Main() {
           slingshotRef.current.slingLeft.pointB = { x: centerX, y: leftArmY };
           slingshotRef.current.slingRight.pointB = { x: centerX, y: rightArmY };
 
-          // Disminuir intentos después de lanzar
+          
           setAttemptsLeft((prevAttempts) => {
             if (prevAttempts > 0) {
               return prevAttempts - 1;
@@ -197,14 +197,14 @@ function Main() {
     });
 
     Events.on(engine, "beforeUpdate", () => {
-      // console.log('beforeUpdate evento activado');
+      
       const allBodies = Composite.allBodies(engine.world);
       allBodies.forEach((body) => {
         if (body.lifetime !== undefined) {
-          body.lifetime -= 8; // Aproximadamente 16 ms por frame
+          body.lifetime -= 8; 
           if (body.lifetime <= 0) {
-            console.log(`Eliminando objeto: ${body.label}`); // Para ver si está ocurriendo la eliminación
-            World.remove(world, body); // Eliminar el objeto cuando su lifetime se acaba
+            console.log(`Eliminando objeto: ${body.label}`); 
+            World.remove(world, body); 
           }
         }
       });
@@ -316,7 +316,6 @@ function Main() {
 
     PigCastle(world);
 
-    // Configuramos el mouse y sus eventos
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
@@ -337,7 +336,6 @@ function Main() {
       }, 100);
     });
 
-    // Reiniciamos el motor y render
     Runner.run(runner, engine);
     Render.run(render);
   };

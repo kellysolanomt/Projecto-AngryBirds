@@ -4,8 +4,6 @@ const Ground = (world, width, height, groundTexture) => {
     const tileHeight = 50;
     const numberOfTiles = Math.ceil(width / tileWidth);
 
-    // console.log(world, width, height, texture);
-    
     for (let row = 0; row < 3; row++){
         for(let i=0;i<numberOfTiles;i++){
             const bloquePiso = Bodies.rectangle(

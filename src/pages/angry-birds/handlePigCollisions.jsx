@@ -9,31 +9,29 @@ export function handlePigCollisions(
   pigsEliminated,
   setPigsEliminated
 ) {
-  // Solo procesar si el pájaro ya fue lanzado
+  
   if (!isBirdLaunched()) {
-    return; // Si el pájaro no ha sido lanzado, no hacemos nada.
+    return; 
   }
 
   if (pig.is_remove) {
-    return; // Si el cerdo ya fue eliminado, no hacemos nada.
+    return; 
   }
 
   const totalPigs = world.bodies.filter((body) => body.label === "Pig").length;
 
-  // Calcular la velocidad relativa de los cuerpos en colisión
+
   const impactVelocity = Math.sqrt(
     Math.pow(pair.bodyA.velocity.x - pair.bodyB.velocity.x, 2) +
       Math.pow(pair.bodyA.velocity.y - pair.bodyB.velocity.y, 2)
   );
 
-  // Definir un umbral mínimo para que el impacto cause daño
-  const IMPACT_THRESHOLD = 3; // Ajustar según lo necesario
+  
+  const IMPACT_THRESHOLD = 3; 
   if (impactVelocity > IMPACT_THRESHOLD) {
-    // Reducir la vida del cerdo basado en la fuerza del impacto
-    pig.life -= impactVelocity * 3; // Ajustar el multiplicador para balancear el daño
+    pig.life -= impactVelocity * 3; 
     console.log(`Cerdo fue golpeado, vida restante: ${pig.life}`);
 
-    // Eliminar el cerdo si su vida llega a 0
     if (
       pig.life <= 0 ||
       pig.lifetime <= 0 ||

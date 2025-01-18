@@ -121,28 +121,28 @@ body {
 }
 
 .btn-reiniciar:hover {
-  outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
-  border: none; /* Asegura que no haya borde */
-  transform: scale(0.9); /* Agranda el botón un 10% */
+  outline: none; 
+  border: none; 
+  transform: scale(0.9); 
 }
 
 .btn-reiniciar:focus {
-  outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
-  border: none; /* Asegura que no haya borde */
+  outline: none; 
+  border: none; 
 }
 
 .btn-reiniciar:active {
-  transform: scale(0.7); /* Reduce la escala al hacer clic */
+  transform: scale(0.7); 
 }
 
 .btn-reiniciar:hover:active {
   transform: scale(
     0.7
-  ); /* Asegura que el botón se reduzca al hacer clic incluso cuando está en estado hover */
+  );
 }
 
 .btn-reiniciar:focus:not(:hover) {
-  transform: scale(0.8); /* Restablece la escala al perder el hover */
+  transform: scale(0.8); 
 }
 
 .btn-siguientePajaro:hover {
@@ -156,7 +156,7 @@ body {
   margin: 5px 0;
   filter: drop-shadow(
     2px 2px 5px rgba(0, 0, 0, 0.5)
-  ); /* Agrega esta línea para la sombra */
+  );
 }
 
 .time {

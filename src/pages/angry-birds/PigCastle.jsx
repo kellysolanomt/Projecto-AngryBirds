@@ -46,14 +46,7 @@ function PigCastle(world) {
 
     pig.is_remove = false;
     pig.life = 100;
-    pig.lifetime = 15000; // Lifetime en milisegundos (5 segundos, puedes ajustarlo)
-    // pig.createdAt = Date.now(); // Fecha de creación para controlar el tiempo de vida
-
-    // setTimeout(() => {
-    // 	if (Date.now() - pig.createdAt >= pig.lifeTime) {
-    // 		World.remove(world, pig);
-    // 	}
-    // }, pig.lifeTime);
+    pig.lifetime = 15000; 
 
     return pig;
   };
