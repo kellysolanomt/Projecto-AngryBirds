@@ -15,6 +15,7 @@ import Bird from "./Bird";
 import SlingShot from "./SlingShot";
 import PigCastle from "./PigCastle";
 import { handlePigCollisions } from "./handlePigCollisions";
+import { checkPigsOutOfBounds } from "./checkPigsOutofBounds";
 import "../../styles/Main.css";
 import WinView from "./WinView";
 import LoseView from "./LoseView";
@@ -49,13 +50,38 @@ function Main() {
   }, [timerActive]);
 
   useEffect(() => {
-    if (pigsEliminated === 3 && attemptsLeft >= 0) {
-      handleWin();
-    } else if (attemptsLeft === 0 && pigsEliminated < 3) {
-      handleLose();
-    }
+    console.log("Pigs eliminated: ", pigsEliminated);
+    const timeout = setTimeout(() => {
+      if (pigsEliminated === 3) {
+        handleWin();
+      } else if (attemptsLeft === 0) {
+        handleLose();
+      }
+    }, 5000);
+
+    return () => clearTimeout(timeout);
   }, [pigsEliminated, attemptsLeft]);
-  
+
+  useEffect(() => {
+    // Inicia el ciclo de actualización
+    const update = () => {
+      // Actualiza el motor de física
+      Engine.update(engineRef.current, 1000 / 60);
+
+      // Verificar si el pájaro ya ha sido lanzado antes de verificar los cerdos fuera de los límites
+      if (pajaroLanzadoRef.current) {
+        checkPigsOutOfBounds(engineRef.world, setPigsEliminated); // Verificación de cerdos fuera de límites
+      }
+
+      // Continuar el ciclo de actualización
+      requestAnimationFrame(update);
+    };
+
+    // Comienza el ciclo de actualización
+    requestAnimationFrame(update);
+
+    return () => cancelAnimationFrame(update); // Limpiar cuando el componente se desmonte
+  }, [pajaroLanzadoRef]); // La dependencia solo se ejecuta cuando se cambia `isBirdLaunched`
 
   useEffect(() => {
     const engine = Engine.create();
@@ -182,26 +208,6 @@ function Main() {
           }
         }
       });
-
-      // Verificar si todos los cuerpos relevantes han desaparecido
-      const remainingBodies = allBodies.filter(
-        (body) => body.lifetime !== undefined && body.lifetime > 0
-      );
-      const remainingPigs = allBodies.filter(
-        (body) => body.label === "Pig" && body.lifetime > 0
-      );
-
-      if (remainingPigs.length === 0 && attemptsLeft >= 0) {
-        handleWin();
-      }
-
-      if (
-        remainingBodies.length === 0 &&
-        attemptsLeft === 0 &&
-        remainingPigs.length > 0
-      ) {
-        handleLose();
-      }
     });
 
     return () => {

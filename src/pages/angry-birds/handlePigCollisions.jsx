@@ -14,6 +14,10 @@ export function handlePigCollisions(
     return; // Si el pájaro no ha sido lanzado, no hacemos nada.
   }
 
+  if (pig.is_remove) {
+    return; // Si el cerdo ya fue eliminado, no hacemos nada.
+  }
+
   const totalPigs = world.bodies.filter((body) => body.label === "Pig").length;
 
   // Calcular la velocidad relativa de los cuerpos en colisión
@@ -40,17 +44,10 @@ export function handlePigCollisions(
     ) {
       World.remove(world, pig);
       console.log("Cerdo eliminado del mundo");
-      setPigsEliminated((prev) => {
-        const newCount = prev + 1;
-
-        // // Verificar si todos los cerdos han sido eliminados
-
-        // if (newCount === totalPigs) {
-        //   alert("¡Haz ganado!");
-        // }
-
-        return newCount; // Devuelve el nuevo estado
-      });
+      pig.is_remove = true;
+      setPigsEliminated((prev) => prev + 1);
+      
     }
+
   }
 }
