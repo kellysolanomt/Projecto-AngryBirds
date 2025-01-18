@@ -27,6 +27,17 @@ function Main() {
   const [attemptsLeft, setAttemptsLeft] = useState(3);
   const pajaroLanzadoRef = useRef(false);
   const [pigsEliminated, setPigsEliminated] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeElapsed((prevTime) => prevTime + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     if (pigsEliminated === 3) {
@@ -216,6 +227,7 @@ function Main() {
     pajaroLanzadoRef.current = false;
     setAttemptsLeft(3);
     setPigsEliminated(0);
+    setTimeElapsed(0);
     // Configuramos el mundo nuevamente
     const world = engine.world;
 
@@ -299,6 +311,9 @@ function Main() {
         <button className="btn-siguientePajaro" onClick={launchNextBird}>
           Lanzar siguiente pájaro
         </button>
+        <div className="time">
+            <h3>Tiempo transcurrido: {timeElapsed} segundos</h3>
+        </div>
       </div>
       <div className="container-birds">
         <div className="birds-container">
