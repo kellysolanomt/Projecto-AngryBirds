@@ -20,6 +20,16 @@ function Main() {
     const [pigsEliminated, setPigsEliminated] = useState(0);
 
     useEffect(() => {
+        if (pigsEliminated === 3) {
+            // Espera un breve período para que React actualice el DOM
+            setTimeout(() => {
+                alert(`¡Cerdos eliminados: ${pigsEliminated}!`);
+            }, 100); // Ajusta el tiempo si es necesario
+        }
+    }, [pigsEliminated]);
+    
+
+    useEffect(() => {
         const engine = Engine.create();
         const runner = Runner.create();
         engineRef.current = engine;

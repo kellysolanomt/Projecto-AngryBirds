@@ -29,11 +29,11 @@ export function handlePigCollisions(pig, pair, world, isBirdLaunched, pigsElimin
             setPigsEliminated(prev => {
                 const newCount = prev + 1;
           
-                // Verificar si todos los cerdos han sido eliminados
+                // // Verificar si todos los cerdos han sido eliminados
                 
-                if (newCount === totalPigs) {
-                  alert("¡Haz ganado!");
-                }
+                // if (newCount === totalPigs) {
+                //   alert("¡Haz ganado!");
+                // }
           
                 return newCount; // Devuelve el nuevo estado
               });
