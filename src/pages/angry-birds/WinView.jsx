@@ -5,11 +5,10 @@ const WinView = ({ onClose }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close" onClick={onClose}>
-          &times;
-        </span>
         <h1>¡Felicidades!</h1>
+        <img className="image" src="./win.webp" alt="Win Img"/>
         <p>Has ganado el juego</p>
+        <button className="button" onClick={onClose}>¿De nuevo?</button>
       </div>
     </div>
   );

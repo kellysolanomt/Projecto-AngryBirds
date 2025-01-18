@@ -182,17 +182,34 @@ function Main() {
       const allBodies = Composite.allBodies(engine.world);
       allBodies.forEach((body) => {
         if (body.lifetime !== undefined) {
-          body.lifetime -= 5; // Aproximadamente 16 ms por frame
+          body.lifetime -= 8; // Aproximadamente 16 ms por frame
           if (body.lifetime <= 0) {
             console.log(`Eliminando objeto: ${body.label}`); // Para ver si está ocurriendo la eliminación
             World.remove(world, body); // Eliminar el objeto cuando su lifetime se acaba
           }
         }
       });
+
+      // Verificar si todos los cuerpos relevantes han desaparecido
+      const remainingBodies = allBodies.filter(
+        (body) => body.lifetime !== undefined && body.lifetime > 0
+      );
+      const remainingPigs = allBodies.filter(
+        (body) => body.label === "Pig" && body.lifetime > 0
+      );
+
+      if (
+        remainingBodies.length === 0 &&
+        attemptsLeft === 0 &&
+        remainingPigs.length > 0
+      ) {
+        handleLose();
+      }
     });
 
     return () => {
       Events.off(engine, "collisionStart");
+      Events.off(engine, "beforeUpdate");
       Render.stop(render);
       Runner.stop(runner);
       Engine.clear(engine);
