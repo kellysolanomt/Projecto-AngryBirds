@@ -1,177 +1,179 @@
 @font-face {
-    font-family: 'Feast of Flesh BB';
-    src: url('../fonts/FeastOfFleshBb-AVm.ttf');
-    font-style: normal;
-    font-weight: normal;
+  font-family: "Feast of Flesh BB";
+  src: url("../fonts/FeastOfFleshBb-AVm.ttf");
+  font-style: normal;
+  font-weight: normal;
 }
 
 @font-face {
-    font-family: 'Angry Birds';
-    src: url('../fonts/angrybirds-regular.ttf');
-    font-style: normal;
-    font-weight: normal;
+  font-family: "Angry Birds";
+  src: url("../fonts/angrybirds-regular.ttf");
+  font-style: normal;
+  font-weight: normal;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .container {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background-image: url('/cielo.jpg');
-    background-size: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-image: url("/cielo.jpg");
+  background-size: cover;
 }
 
 .btn-group {
-    display: flex;
-    width: 100%;
-    margin: 1em;
-    height: 100px;
-    z-index: 10;
-    align-items: center;
-    position: absolute;
+  display: flex;
+  width: 100%;
+  margin: 1em;
+  height: 100px;
+  z-index: 10;
+  align-items: center;
+  position: absolute;
 }
 
-.container-birds{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100%;
-    width: 10%;
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    margin-right: 2.5em;
+.container-birds {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 10%;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  margin-right: 2.5em;
 }
 
-.birds-container{
-    display: flex;
-    width: 100%;
-    height: 60%;
-    justify-content: center;
-    align-items: center;
-    margin-right: 50px;
-    flex-direction: column;
+.birds-container {
+  display: flex;
+  width: 100%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+  flex-direction: column;
 }
 
-.birds-container h3{
-    font-family: 'Angry Birds';
-    font-size: 2.5em;
-    color: #fbb81e;
-    margin: 0;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.5px black;
+.birds-container h3 {
+  font-family: "Angry Birds";
+  font-size: 2.5em;
+  color: #fbb81e;
+  margin: 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: 0.5px black;
 }
 
-.birds{
-    
-    width: 100px;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3rem;
+.birds {
+  width: 100px;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
 }
 
 .btn-reiniciar {
-    margin: 0 1em;
-    width: 148px;
-    height: 100px;
-    /* background-color: #fbb81e; */
-    /* color: #fff; */
-    /* font-size: 1.5em;
+  margin: 0 1em;
+  width: 148px;
+  height: 100px;
+  /* background-color: #fbb81e; */
+  /* color: #fff; */
+  /* font-size: 1.5em;
     font-family: 'Angry Birds'; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    /* border: 2px solid #f49d1d; */
-    background-image: url('/ABPC_button_sheet.png');
-    background-position: -8px -949px;
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    transition: transform 0.5s ease;
-    transform: scale(0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* border: 2px solid #f49d1d; */
+  background-image: url("/ABPC_button_sheet.png");
+  background-position: -8px -949px;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: transform 0.5s ease;
+  transform: scale(0.8);
 }
 
-
-.btn-siguientePajaro{
-    margin: 0 1em;
-    width: 30rem;
-    height: 60%;
-    background-color: #fbb81e;
-    color: #fff;
-    font-size: 1.5em;
-    font-family: 'Angry Birds';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: 2px solid #f49d1d;
-    transition: transform 0.8s ease;
+.btn-siguientePajaro {
+  margin: 0 1em;
+  width: 30rem;
+  height: 60%;
+  background-color: #fbb81e;
+  color: #fff;
+  font-size: 1.5em;
+  font-family: "Angry Birds";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid #f49d1d;
+  transition: transform 0.8s ease;
 }
 
 .btn-reiniciar:hover {
-    outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
-    border: none; /* Asegura que no haya borde */
-    transform: scale(0.9); /* Agranda el botón un 10% */
+  outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
+  border: none; /* Asegura que no haya borde */
+  transform: scale(0.9); /* Agranda el botón un 10% */
 }
 
 .btn-reiniciar:focus {
-    outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
-    border: none; /* Asegura que no haya borde */
+  outline: none; /* Asegura que no haya borde azul al pasar el cursor o enfocar */
+  border: none; /* Asegura que no haya borde */
 }
 
 .btn-reiniciar:active {
-    transform: scale(0.7); /* Reduce la escala al hacer clic */
+  transform: scale(0.7); /* Reduce la escala al hacer clic */
 }
 
 .btn-reiniciar:hover:active {
-    transform: scale(0.7); /* Asegura que el botón se reduzca al hacer clic incluso cuando está en estado hover */
+  transform: scale(
+    0.7
+  ); /* Asegura que el botón se reduzca al hacer clic incluso cuando está en estado hover */
 }
 
 .btn-reiniciar:focus:not(:hover) {
-    transform: scale(0.8); /* Restablece la escala al perder el hover */
+  transform: scale(0.8); /* Restablece la escala al perder el hover */
 }
 
 .btn-siguientePajaro:hover {
-    background-color: #f49d1d;
-    border: 2px solid #fbb81e;
+  background-color: #f49d1d;
+  border: 2px solid #fbb81e;
 }
 
-.bird-image{
-    width: 50px;
-    height: auto;
-    margin: 5px 0;
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5)); /* Agrega esta línea para la sombra */
+.bird-image {
+  width: 50px;
+  height: auto;
+  margin: 5px 0;
+  filter: drop-shadow(
+    2px 2px 5px rgba(0, 0, 0, 0.5)
+  ); /* Agrega esta línea para la sombra */
 }
 
-.time{
-    height: 100%;
-    width: 100%;
-    margin-right: 5em;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.time {
+  height: 100%;
+  width: 100%;
+  margin-right: 5em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.time h3{
-    font-family: 'Angry Birds';
-    font-size: 2em;
-    color: #ffffff;
-    margin: 0;
-    text-align: right;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.5px black;
+.time h3 {
+  font-family: "Angry Birds";
+  font-size: 2em;
+  color: #ffffff;
+  margin: 0;
+  text-align: right;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: 0.5px black;
 }

@@ -1,18 +1,18 @@
 import React from "react";
-import "../../styles/WinView.css";
+import "../../styles/LoseView.css";
 
-const WinView = ({ onClose }) => {
+const LoseView = ({ onClose }) => {
   return (
     <div className="modal">
       <div className="modal-content">
         <span className="close" onClick={onClose}>
           &times;
         </span>
-        <h1>¡Felicidades!</h1>
-        <p>Has ganado el juego</p>
+        <h1>¡Perdiste!</h1>
+        <p>Lo siento, has perdido el juego</p>
       </div>
     </div>
   );
 };
 
-export default WinView;
+export default LoseView;

@@ -8,6 +8,7 @@ import {
   MouseConstraint,
   Events,
   Composite,
+  use,
 } from "matter-js";
 import Ground from "./Ground";
 import Bird from "./Bird";
@@ -15,6 +16,8 @@ import SlingShot from "./SlingShot";
 import PigCastle from "./PigCastle";
 import { handlePigCollisions } from "./handlePigCollisions";
 import "../../styles/Main.css";
+import WinView from "./WinView";
+import LoseView from "./LoseView";
 
 function Main() {
   const sceneRef = useRef(null);
@@ -28,6 +31,8 @@ function Main() {
   const pajaroLanzadoRef = useRef(false);
   const [pigsEliminated, setPigsEliminated] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const [showWinModal, setShowWinModal] = useState(false);
+  const [showLoseModal, setShowLoseModal] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,10 +48,21 @@ function Main() {
     if (pigsEliminated === 3) {
       // Espera un breve período para que React actualice el DOM
       setTimeout(() => {
-        alert(`¡Cerdos eliminados: ${pigsEliminated}!`);
+        // alert(`¡Cerdos eliminados: ${pigsEliminated}!`);
+        handleWin();
       }, 100); // Ajusta el tiempo si es necesario
     }
   }, [pigsEliminated]);
+
+  useEffect(() => {
+    if (attemptsLeft === 0 && pigsEliminated < 3) {
+      // Espera un breve período para que React actualice el DOM
+      setTimeout(() => {
+        // alert("¡Perdiste! Inténtalo de nuevo.");
+        handleLose();
+      }, 100); // Ajusta el tiempo si es necesario
+    }
+  }, [attemptsLeft]);
 
   useEffect(() => {
     const engine = Engine.create();
@@ -125,24 +141,24 @@ function Main() {
     World.add(world, mouseConstraint);
 
     Events.on(mouseConstraint, "mouseup", () => {
-        if (!pajaroLanzadoRef.current) {
-          pajaroLanzadoRef.current = true;
-          setTimeout(() => {
-            slingshotRef.current.slingLeft.bodyB = null;
-            slingshotRef.current.slingRight.bodyB = null;
-            slingshotRef.current.slingLeft.pointB = { x: centerX, y: leftArmY };
-            slingshotRef.current.slingRight.pointB = { x: centerX, y: rightArmY };
-    
-            // Disminuir intentos después de lanzar
-            setAttemptsLeft((prevAttempts) => {
-              if (prevAttempts > 0) {
-                return prevAttempts - 1;
-              }
-              return prevAttempts;
-            });
-          }, 100);
-        }
-      });
+      if (!pajaroLanzadoRef.current) {
+        pajaroLanzadoRef.current = true;
+        setTimeout(() => {
+          slingshotRef.current.slingLeft.bodyB = null;
+          slingshotRef.current.slingRight.bodyB = null;
+          slingshotRef.current.slingLeft.pointB = { x: centerX, y: leftArmY };
+          slingshotRef.current.slingRight.pointB = { x: centerX, y: rightArmY };
+
+          // Disminuir intentos después de lanzar
+          setAttemptsLeft((prevAttempts) => {
+            if (prevAttempts > 0) {
+              return prevAttempts - 1;
+            }
+            return prevAttempts;
+          });
+        }, 100);
+      }
+    });
 
     Events.on(engine, "collisionStart", (event) => {
       event.pairs.forEach((pair) => {
@@ -187,26 +203,26 @@ function Main() {
 
   const launchNextBird = () => {
     if (attemptsLeft > 0) {
-        const world = engineRef.current.world;
-        const birdRadius = 25;
-        const birdX = window.innerWidth / 4;
-        const birdY =
-          window.innerHeight - (innerHeight - groundRef.current + 510 * 0.36);
-    
-        const newBird = Bird(world, birdX, birdY, birdRadius, "./pajaro.png");
-        birdRef.current = newBird;
-    
-        slingshotRef.current.slingLeft.pointB = { x: 0, y: 0 };
-        slingshotRef.current.slingRight.pointB = { x: 0, y: 0 };
-    
-        slingshotRef.current.slingLeft.bodyB = newBird;
-        slingshotRef.current.slingRight.bodyB = newBird;
-        World.add(world, newBird);
-    
-        pajaroLanzadoRef.current = false;
-      } else {
-        console.log("No quedan más intentos.");
-      }
+      const world = engineRef.current.world;
+      const birdRadius = 25;
+      const birdX = window.innerWidth / 4;
+      const birdY =
+        window.innerHeight - (innerHeight - groundRef.current + 510 * 0.36);
+
+      const newBird = Bird(world, birdX, birdY, birdRadius, "./pajaro.png");
+      birdRef.current = newBird;
+
+      slingshotRef.current.slingLeft.pointB = { x: 0, y: 0 };
+      slingshotRef.current.slingRight.pointB = { x: 0, y: 0 };
+
+      slingshotRef.current.slingLeft.bodyB = newBird;
+      slingshotRef.current.slingRight.bodyB = newBird;
+      World.add(world, newBird);
+
+      pajaroLanzadoRef.current = false;
+    } else {
+      console.log("No quedan más intentos.");
+    }
   };
 
   const reiniciar = () => {
@@ -228,6 +244,8 @@ function Main() {
     setAttemptsLeft(3);
     setPigsEliminated(0);
     setTimeElapsed(0);
+    setShowWinModal(false);
+    setShowLoseModal(false);
     // Configuramos el mundo nuevamente
     const world = engine.world;
 
@@ -304,6 +322,20 @@ function Main() {
     Render.run(render);
   };
 
+  const handleWin = () => {
+    setShowWinModal(true);
+  };
+
+  const handleLose = () => {
+    setShowLoseModal(true);
+  };
+
+  const closeModal = () => {
+    setShowWinModal(false);
+    setShowLoseModal(false);
+    reiniciar();
+  };
+
   return (
     <div className="container">
       <div className="btn-group">
@@ -312,7 +344,7 @@ function Main() {
           Lanzar siguiente pájaro
         </button>
         <div className="time">
-            <h3>Tiempo transcurrido: {timeElapsed} segundos</h3>
+          <h3>Tiempo transcurrido: {timeElapsed} segundos</h3>
         </div>
       </div>
       <div className="container-birds">
@@ -331,6 +363,9 @@ function Main() {
         </div>
       </div>
       <div ref={sceneRef}></div>
+
+      {showWinModal && <WinView onClose={closeModal} />}
+      {showLoseModal && <LoseView onClose={closeModal} />}
     </div>
   );
 }
