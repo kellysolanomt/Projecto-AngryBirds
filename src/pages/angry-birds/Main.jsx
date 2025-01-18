@@ -31,36 +31,31 @@ function Main() {
   const pajaroLanzadoRef = useRef(false);
   const [pigsEliminated, setPigsEliminated] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const [timerActive, setTimerActive] = useState(true);
   const [showWinModal, setShowWinModal] = useState(false);
   const [showLoseModal, setShowLoseModal] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeElapsed((prevTime) => prevTime + 1);
-    }, 1000);
+    let interval;
+    if (timerActive) {
+      interval = setInterval(() => {
+        setTimeElapsed((prevTime) => prevTime + 1);
+      }, 1000);
+    }
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [timerActive]);
 
   useEffect(() => {
     if (pigsEliminated === 3 && attemptsLeft >= 0) {
-      setTimeout(() => {
-        handleWin();
-      }, 100);
-    } 
-  }, [pigsEliminated]);
-
-  useEffect(() => {
-    if (attemptsLeft === 0 && pigsEliminated < 3) {
-      // Espera un breve período para que React actualice el DOM
-      setTimeout(() => {
-        // alert("¡Perdiste! Inténtalo de nuevo.");
-        handleLose();
-      }, 100); // Ajusta el tiempo si es necesario
+      handleWin();
+    } else if (attemptsLeft === 0 && pigsEliminated < 3) {
+      handleLose();
     }
-  }, [attemptsLeft]);
+  }, [pigsEliminated, attemptsLeft]);
+  
 
   useEffect(() => {
     const engine = Engine.create();
@@ -195,6 +190,10 @@ function Main() {
       const remainingPigs = allBodies.filter(
         (body) => body.label === "Pig" && body.lifetime > 0
       );
+
+      if (remainingPigs.length === 0 && attemptsLeft >= 0) {
+        handleWin();
+      }
 
       if (
         remainingBodies.length === 0 &&
@@ -339,15 +338,18 @@ function Main() {
 
   const handleWin = () => {
     setShowWinModal(true);
+    setTimerActive(false);
   };
 
   const handleLose = () => {
     setShowLoseModal(true);
+    setTimerActive(false);
   };
 
   const closeModal = () => {
     setShowWinModal(false);
     setShowLoseModal(false);
+    setTimerActive(true);
     reiniciar();
   };
 
