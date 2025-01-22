@@ -21,6 +21,10 @@ function PigCastle(world) {
           yScale: yScale,
         },
       },
+      collisionFilter: {
+        category: 0x0001, 
+        mask: 0x0002 | 0x0001 
+    }
     });
 
     block.lifetime = 15000;
@@ -42,6 +46,10 @@ function PigCastle(world) {
           yScale: 0.1,
         },
       },
+      collisionFilter: {
+        category: 0x0001, 
+        mask: 0x0002 | 0x0001 
+     }
     });
 
     pig.is_remove = false;

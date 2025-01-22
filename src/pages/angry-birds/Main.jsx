@@ -136,6 +136,10 @@ function Main() {
         stiffness: 0.07,
         render: { visible: false },
       },
+      collisionFilter: {
+        category: 0x0008,
+        mask: 0x0002 | 0x0004, 
+      }
     });
     World.add(world, mouseConstraint);
 
@@ -323,6 +327,10 @@ function Main() {
         stiffness: 0.07,
         render: { visible: false },
       },
+      collisionFilter: {
+        category: 0x0008,
+        mask: 0x0002 | 0x0004, 
+    }
     });
     World.add(world, mouseConstraint);
 

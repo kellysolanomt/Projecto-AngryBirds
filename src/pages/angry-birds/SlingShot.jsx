@@ -12,6 +12,10 @@ function SlingShot(world, bird, x, y, leftArmX, leftArmY, rightArmX, rightArmY, 
             type: 'line',
             strokeStyle: '#120E0A', 
             lineWidth: 8,
+        },
+        collisionFilter: {
+            category: 0x0004, 
+            mask: 0x0002
         }
     });
     
@@ -25,6 +29,10 @@ function SlingShot(world, bird, x, y, leftArmX, leftArmY, rightArmX, rightArmY, 
             type: 'line',
             strokeStyle: '#120E0A', 
             lineWidth: 8,
+        },
+        collisionFilter: {
+            category: 0x0004, 
+            mask: 0x0002
         }
     });
 

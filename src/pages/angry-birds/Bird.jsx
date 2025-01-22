@@ -13,7 +13,11 @@ function Bird(world, x, y, radius, birdTexture) {
             xScale: radius/250,
             yScale: radius/250
         }
-    }
+    },
+    collisionFilter: {
+      category: 0x0002, 
+      mask: 0x0001 | 0x0004 | 0x0008
+  }
   });
   
   return bird;
